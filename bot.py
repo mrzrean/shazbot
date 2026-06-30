@@ -8,7 +8,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 # ==================== CONFIG ====================
 BOT_TOKEN = "8811695172:AAElOR2kWDC3cnXI5uyS2Ko5jpiVRleFyjs"
-TEMPLATE_IMAGE = "cood.jpg.jpg"
+TEMPLATE_IMAGE = "C:\\Users\\zrean\\OneDrive\\Desktop\\cood.jpg"
 # ================================================
 
 logging.basicConfig(level=logging.INFO)
@@ -24,7 +24,12 @@ def create_final_image(user1_bytes, user2_bytes):
     except:
         bg = Image.new("RGBA", (1920, 1080), (200, 20, 60, 255))
 
-    def create_circle_avatar(img_bytes, size=500):
+    # ===== گۆڕانکاری بۆ شوێنی بازنەکان =====
+    left_x, left_y = 300, 322
+    right_x, right_y = 965, 325
+    # =======================================
+
+    def create_circle_avatar(img_bytes, size=400):
         if not img_bytes:
             return None
         try:
@@ -39,33 +44,13 @@ def create_final_image(user1_bytes, user2_bytes):
         except:
             return None
 
-    # ===== گۆڕانکاری لە شوێنی بازنەکان (بۆ ئەم وێنەیە) =====
-    left_x, left_y = 345, 422
-    right_x, right_y = 980, 422
-    # =======================================================
-
-    def create_broken_heart(size=500):
-        heart = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-        draw_heart = ImageDraw.Draw(heart)
-        try:
-            font = ImageFont.truetype("arial.ttf", 280)
-        except:
-            font = ImageFont.load_default()
-        draw_heart.text((size//2, size//2), "💔", fill=(255, 100, 150, 255), anchor="mm", font=font)
-        return heart
-
     avatar1 = create_circle_avatar(user1_bytes)
     avatar2 = create_circle_avatar(user2_bytes)
 
     if avatar1:
-        bg.paste(avatar1, (left_x - 250, left_y - 250), avatar1)
-    else:
-        bg.paste(create_broken_heart(), (left_x - 250, left_y - 250), create_broken_heart())
-
+        bg.paste(avatar1, (left_x - 200, left_y - 200), avatar1)
     if avatar2:
-        bg.paste(avatar2, (right_x - 250, right_y - 250), avatar2)
-    else:
-        bg.paste(create_broken_heart(), (right_x - 250, right_y - 250), create_broken_heart())
+        bg.paste(avatar2, (right_x - 200, right_y - 200), avatar2)
 
     out = BytesIO()
     bg.save(out, format="PNG")
