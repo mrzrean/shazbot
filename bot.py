@@ -8,7 +8,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 # ==================== CONFIG ====================
 BOT_TOKEN = "8811695172:AAElOR2kWDC3cnXI5uyS2Ko5jpiVRleFyjs"
-TEMPLATE_IMAGE = "C:\\Users\\zrean\\OneDrive\\Desktop\\template.jpg.jpg"
+TEMPLATE_IMAGE = "cood.jpg"
 # ================================================
 
 logging.basicConfig(level=logging.INFO)
